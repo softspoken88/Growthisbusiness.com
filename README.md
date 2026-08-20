@@ -186,15 +186,25 @@ The brief plans for: `/business-automation`, `/small-business-consulting`,
 `/sales-consulting`, `/sales-automation`, `/crm-consulting`,
 `/workflow-automation`, `/business-growth-consulting`.
 
-Workforce training has its own set of planned pages, following the
-same "don't publish until there's real content" rule:
-`/lms-consulting`, `/lms-selection`, `/training-content`,
-`/compliance-training`, `/safety-training`, `/sales-training`,
-`/custom-elearning-development`. `app/workforce-training/page.tsx`
-is the hub these would eventually link out from.
+Workforce training has its own, larger set of planned pages, nested
+under the hub page, following the same "don't publish until there's
+real content" rule: `/lms-consulting`, `/lms-selection`,
+`/workforce-training/safety-training`,
+`/workforce-training/compliance-training`,
+`/workforce-training/leadership-training`,
+`/workforce-training/sales-training`,
+`/workforce-training/business-skills`,
+`/workforce-training/k12-afterschool`,
+`/workforce-training/employee-onboarding`,
+`/workforce-training/custom-elearning`,
+`/workforce-training/training-content`. `app/workforce-training/page.tsx`
+is the hub these would eventually link out from — its content
+category grid is the natural place to add those links once each page
+exists.
 
-For each, create `app/<slug>/page.tsx` following the pattern in
-`app/assessment/page.tsx`:
+For each, create `app/<slug>/page.tsx` (or
+`app/workforce-training/<slug>/page.tsx` for the nested ones)
+following the pattern in `app/assessment/page.tsx`:
 
 ```tsx
 import type { Metadata } from "next";
@@ -224,6 +234,51 @@ roofing, property-management, professional-services,
 financial-services. `components/Industries.tsx` is the natural place
 to link out to these once they exist (each industry card becomes a
 `<Link href="/industries/plumbing">`).
+
+## 9. Resources / articles and attribution tracking — not built yet
+
+A workforce-training expansion brief referenced these as if they
+already existed on the site. They don't, and weren't added in that
+pass — building them properly is its own scoped project, not
+something to bolt on silently inside an unrelated content update:
+
+- **Resources / SEO articles.** No blog or article system exists.
+  The brief's content ideas ("How much does an LMS cost?", "How to
+  choose an LMS," etc.) are real, good topics, but they need an
+  actual system to live in — at minimum an `app/resources/` index
+  route, a `[slug]/page.tsx` for individual articles, some source
+  for the content (MDX files, a headless CMS, or hand-written pages),
+  and sitemap/internal-linking wiring so they actually support SEO
+  rather than existing in isolation.
+- **Attribution tracking.** Nothing captures UTM parameters, referrer,
+  or landing page today — the Growth Assessment form only sends the
+  fields visible on the form itself. Adding this means deciding on an
+  approach (first-touch vs. last-touch, cookie vs. query-param
+  passthrough) and adding hidden fields to
+  `components/GrowthAssessmentForm.tsx` plus corresponding fields in
+  `app/api/assessment/route.ts`'s payload and email template.
+
+Both are reasonable next projects — just flagging that they're new
+builds, not existing infrastructure being preserved.
+
+## 10. Activating the partner logo section
+
+`components/PartnerLogos.tsx` is built and already imported into
+`app/workforce-training/page.tsx`, but renders nothing — its
+`PARTNERS` array is intentionally empty, with no real provider names
+anywhere in the codebase (the repo is public). To turn it on, add
+entries to that array (`{ name, logoSrc, href }`), and place the
+actual logo image files under `public/`. No other file needs to
+change.
+
+## 11. Business Technology & Communications
+
+Currently represented as a line item in
+`components/PartnerCapabilities.tsx`'s coordinated-specialist list
+only — not a homepage pillar (per the brief) and not yet a dedicated
+page, to avoid a thin page with nothing behind it. If this grows into
+its own service page later, `/business-technology` following the
+`app/workforce-training/page.tsx` pattern is the natural slug.
 
 ## SEO notes
 

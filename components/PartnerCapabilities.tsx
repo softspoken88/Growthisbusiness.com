@@ -5,6 +5,8 @@ const PARTNER_AREAS = [
   "Graphic design & branding",
   "Bookkeeping & specialized accounting",
   "Advanced software development & integrations",
+  "Instructional design & training-content development",
+  "Business phone, internet & connectivity",
 ];
 
 export default function PartnerCapabilities() {

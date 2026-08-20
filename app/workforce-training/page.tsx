@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PartnerLogos from "@/components/PartnerLogos";
 
 export const metadata: Metadata = {
   title: "Workforce Training Consulting | LMS Selection & Training Solutions",
   description:
-    "From LMS selection to compliance training, professional development, and custom learning content, we help organizations build training programs that work for their people and their business.",
+    "From LMS selection to safety, compliance, leadership, and custom learning content, we help organizations build training programs that work for their people and their business.",
   alternates: { canonical: "/workforce-training" },
 };
 
@@ -13,25 +14,47 @@ const LMS_POINTS = [
   "Requirements gathering",
   "Replacement & migration planning",
   "Implementation & configuration strategy",
-  "Integration requirements",
+  "Integration & SSO requirements",
   "Vendor comparison & RFP support",
 ];
 
-const READY_MADE_POINTS = [
-  "Workplace safety & OSHA-related training",
-  "Compliance & harassment prevention",
-  "Cybersecurity awareness",
-  "Leadership & management development",
-  "Sales & customer service training",
-  "Professional development",
+const CONTENT_CATEGORIES = [
+  {
+    title: "Workplace Safety & OSHA-Related",
+    copy: "Workplace safety, hazard communication, PPE, and emergency preparedness — matched to your industry, not treated as one-size-fits-all.",
+  },
+  {
+    title: "Compliance & Ethics",
+    copy: "Harassment prevention, workplace conduct, HR compliance, and privacy & security awareness.",
+  },
+  {
+    title: "Leadership & Management",
+    copy: "Supervisor fundamentals, coaching, performance management, and change management.",
+  },
+  {
+    title: "Sales & Customer Service",
+    copy: "Consultative selling, prospecting, customer experience, negotiation, and account management.",
+  },
+  {
+    title: "Business & Professional Skills",
+    copy: "Communication, time management, workplace technology, and career development.",
+  },
+  {
+    title: "K-12, Afterschool & Youth Development",
+    copy: "Professional development for education and youth-serving staff, program quality, and staff development — matched to your specific programs.",
+  },
+  {
+    title: "Employee Onboarding",
+    copy: "Required training, role-based learning, and your own culture and process training — automatically assigned and tracked.",
+  },
 ];
 
 const CUSTOM_POINTS = [
   "Custom eLearning strategy",
   "Instructional design coordination",
   "Video-based & microlearning content",
-  "Employee onboarding & product training",
-  "Process / SOP training",
+  "Product & process / SOP training",
+  "Scenario-based learning",
   "Assessments & knowledge checks",
 ];
 
@@ -53,6 +76,7 @@ const AUTOMATION_FLOW = [
   "Completion recorded",
   "Manager notified",
   "Reporting updated",
+  "Renewal / recertification triggered when applicable",
 ];
 
 const AUDIENCES = [
@@ -78,10 +102,9 @@ export default function WorkforceTrainingPage() {
             Build a Better-Trained Workforce.
           </h1>
           <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-paper-muted">
-            From LMS selection to compliance training, professional
-            development, and custom learning content, we help organizations
-            build training programs that work for their people and their
-            business.
+            From LMS selection to safety, compliance, leadership, and custom
+            learning content, we help organizations build training programs
+            that work for their people and their business.
           </p>
           <div className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center">
             <Link
@@ -115,6 +138,17 @@ export default function WorkforceTrainingPage() {
                 learning technology actually fits your organization, then
                 help you evaluate, select, and implement it.
               </p>
+              <div className="mt-7 rounded-2xl border border-signal/40 bg-signal/5 p-6">
+                <p className="font-display text-[1.05rem] font-semibold leading-snug text-ink-text">
+                  Train more people without watching your LMS bill grow with
+                  every user.
+                </p>
+                <p className="mt-2.5 text-[13.5px] leading-relaxed text-ink-muted">
+                  Through select GTB learning-technology solutions,
+                  organizations can support large or changing learner
+                  populations without traditional per-user pricing.
+                </p>
+              </div>
             </div>
             <div className="rounded-2xl border border-line bg-paper p-7 sm:p-8">
               <p className="bp-label text-ink-muted">What This Covers</p>
@@ -131,54 +165,58 @@ export default function WorkforceTrainingPage() {
         </div>
       </section>
 
-      {/* Training Content: Ready-Made + Custom */}
+      {/* Training Content categories */}
       <section className="bg-paper-2 bp-grid-paper">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
           <div className="max-w-2xl">
             <p className="bp-label text-structural">Training Content</p>
             <h2 className="mt-4 font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-text sm:text-[2.35rem]">
-              Whether it already exists, or needs to be built.
+              Thousands of training possibilities. One strategy built around
+              your workforce.
             </h2>
+            <p className="mt-5 text-[16px] leading-relaxed text-ink-muted">
+              Through relationships with established learning-technology,
+              training-content, and instructional-design providers, GTB
+              helps organizations access training across a broad range of
+              workforce-development needs.
+            </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <div className="rounded-2xl border border-line bg-paper p-7 sm:p-8">
-              <h3 className="font-display text-[1.2rem] font-semibold text-ink-text">
-                Ready-Made Training Content
-              </h3>
-              <p className="mt-2.5 text-[14px] leading-relaxed text-ink-muted">
-                We help you source training that already exists and fits
-                your needs, rather than building from scratch when you
-                don&rsquo;t have to.
-              </p>
-              <ul className="mt-5 space-y-2.5 border-t border-line pt-5">
-                {READY_MADE_POINTS.map((p) => (
-                  <li key={p} className="flex items-start gap-2 text-[13.5px] text-ink-text/85">
-                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-structural" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {CONTENT_CATEGORIES.map((c) => (
+              <div key={c.title} className="bg-paper p-6">
+                <h3 className="font-display text-[1.05rem] font-semibold text-ink-text">
+                  {c.title}
+                </h3>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">{c.copy}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 max-w-2xl text-[12.5px] leading-relaxed text-ink-muted">
+            Categories reflect the range of training GTB can help source —
+            not a guarantee that every course satisfies a specific
+            organization&rsquo;s regulatory, OSHA, or accreditation
+            requirements. We&rsquo;ll help you confirm fit for your
+            situation.
+          </p>
 
-            <div className="rounded-2xl border border-line bg-paper p-7 sm:p-8">
-              <h3 className="font-display text-[1.2rem] font-semibold text-ink-text">
-                Custom Training Content
-              </h3>
-              <p className="mt-2.5 text-[14px] leading-relaxed text-ink-muted">
-                For training built specifically around your company,
-                processes, products, or workforce, we coordinate the
-                instructional design and development.
-              </p>
-              <ul className="mt-5 space-y-2.5 border-t border-line pt-5">
-                {CUSTOM_POINTS.map((p) => (
-                  <li key={p} className="flex items-start gap-2 text-[13.5px] text-ink-text/85">
-                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-structural" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mt-14 rounded-2xl border border-line bg-paper p-7 sm:p-8">
+            <h3 className="font-display text-[1.2rem] font-semibold text-ink-text">
+              Custom Training Content
+            </h3>
+            <p className="mt-2.5 max-w-2xl text-[14px] leading-relaxed text-ink-muted">
+              For training built specifically around your company,
+              processes, products, or workforce, we coordinate the
+              instructional design and development.
+            </p>
+            <ul className="mt-5 grid grid-cols-1 gap-3.5 border-t border-line pt-5 sm:grid-cols-2 lg:grid-cols-3">
+              {CUSTOM_POINTS.map((p) => (
+                <li key={p} className="flex items-start gap-2 text-[13.5px] text-ink-text/85">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-structural" />
+                  {p}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -219,25 +257,17 @@ export default function WorkforceTrainingPage() {
             <p className="mt-5 text-[16px] leading-relaxed text-paper-muted">
               The same automation approach we use for sales and operations
               applies here — training doesn&rsquo;t depend on someone
-              remembering to assign it.
+              remembering to assign it, or renew it.
             </p>
           </div>
 
           <div className="bp-corners mt-12 rounded-2xl border border-line-ink bg-ink-2/50 p-7 sm:p-8">
-            <ol className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4">
+            <ol className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-3">
               {AUTOMATION_FLOW.map((step, i) => (
-                <li key={step} className="flex items-start gap-3.5 pb-6">
-                  <div className="flex flex-col items-center">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-signal bg-signal/10 text-[10px] font-mono text-signal">
-                      {i + 1}
-                    </span>
-                    {i < AUTOMATION_FLOW.length - 1 && (
-                      <span
-                        className="my-0.5 hidden h-px w-full border-t sm:block lg:hidden"
-                        style={{ borderColor: "var(--color-signal)" }}
-                      />
-                    )}
-                  </div>
+                <li key={step} className="flex items-start gap-3.5 pb-6 pr-4">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-signal bg-signal/10 text-[10px] font-mono text-signal">
+                    {i + 1}
+                  </span>
                   <span className="pt-0.5 text-[14.5px] font-medium text-paper-text">{step}</span>
                 </li>
               ))}
@@ -253,22 +283,59 @@ export default function WorkforceTrainingPage() {
             <div>
               <p className="bp-label text-structural">When Specialized Work Is Needed</p>
               <h2 className="mt-4 font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-text sm:text-[2.35rem]">
-                One advisor, even when the solution touches multiple
-                vendors.
+                Technology chosen for your organization — not the other way
+                around.
               </h2>
+              <p className="mt-5 max-w-md text-[15.5px] leading-relaxed text-ink-muted">
+                Rather than forcing every organization into a single
+                platform or content library, GTB evaluates your workforce,
+                requirements, technology environment, and budget to
+                identify the right solution.
+              </p>
             </div>
             <div className="rounded-2xl border border-line bg-paper p-7 sm:p-8">
               <p className="text-[15px] leading-relaxed text-ink-text/90">
-                Through relationships with learning technology, training
-                content, and instructional design providers, we help
-                organizations evaluate and implement solutions that fit
-                their workforce, requirements, and budget.
+                Grow This Business works with established learning
+                technology, workforce-training, and instructional-design
+                providers to give organizations access to flexible LMS
+                technology, extensive training libraries, and custom
+                learning solutions.
               </p>
               <p className="mt-5 border-t border-line pt-5 text-[13px] leading-relaxed text-ink-muted">
-                We help you evaluate appropriate LMS platforms, content
-                libraries, and custom-development resources, rather than
-                pointing you toward a single solution regardless of fit.
+                Access to some of the industry&rsquo;s established learning
+                technology, workforce-training, and content solutions —
+                coordinated through one strategic partner. We evaluate your
+                requirements and recommend solutions based on fit.
               </p>
+              <div className="mt-6 border-t border-line pt-6">
+                <PartnerLogos />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Nonprofit pricing */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
+          <div className="bp-corners rounded-2xl border border-line bg-paper-2 p-7 text-center sm:p-10">
+            <p className="bp-label text-structural">Special Pricing for Organizations Doing Important Work</p>
+            <h2 className="mx-auto mt-4 max-w-xl font-display text-[1.6rem] font-semibold leading-[1.2] tracking-tight text-ink-text sm:text-[1.9rem]">
+              Special pricing for organizations doing important work.
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-[14.5px] leading-relaxed text-ink-muted">
+              GTB helps nonprofit and mission-driven organizations access
+              workforce-training, learning technology, and
+              professional-development solutions at pricing designed around
+              their needs.
+            </p>
+            <div className="mt-7">
+              <Link
+                href="/assessment"
+                className="inline-flex items-center justify-center rounded-full bg-ink px-7 py-3.5 text-[14.5px] font-semibold text-paper-text transition-colors hover:bg-ink-3"
+              >
+                Ask About Nonprofit Pricing
+              </Link>
             </div>
           </div>
         </div>
@@ -276,7 +343,7 @@ export default function WorkforceTrainingPage() {
 
       {/* Who This Serves */}
       <section className="bg-paper">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl px-5 pb-20 pt-4 sm:px-8 lg:pb-28">
           <div className="max-w-2xl">
             <p className="bp-label text-structural">Who This Serves</p>
             <h2 className="mt-4 font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-text sm:text-[2.35rem]">
