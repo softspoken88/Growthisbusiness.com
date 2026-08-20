@@ -9,15 +9,8 @@ import { NextResponse } from "next/server";
  * or Resend fails to deliver, the visitor still sees success; we log
  * the problem server-side instead of showing a broken form.
  *
- * IMPORTANT — this will not actually deliver until the
- * growthisbusiness.com domain is verified with Resend. An unverified
- * Resend account can only send from its sandbox address
- * (onboarding@resend.dev) to the same email the Resend account
- * itself was created with — not to arbitrary recipients like
- * jcollins@growthisbusiness.com. Verify the domain in Resend (a
- * handful of DNS records in Cloudflare, the same pattern used for
- * Vercel) to lift that restriction, then update the "from" address
- * below to something on your own domain.
+ * send.growthisbusiness.com is verified in Resend for sending, so
+ * once RESEND_API_KEY is set in Vercel this sends for real.
  */
 
 type AssessmentPayload = {
@@ -75,7 +68,7 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Grow This Business <onboarding@resend.dev>",
+        from: "Grow This Business Website <notifications@send.growthisbusiness.com>",
         to: [NOTIFY_EMAIL],
         reply_to: payload.email,
         subject: `New Growth Assessment — ${payload.company}`,
