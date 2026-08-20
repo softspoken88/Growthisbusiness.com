@@ -52,7 +52,7 @@ export default function Hero() {
           <p className="bp-label text-paper-muted">Fig. 01 — Lead-to-Won, automated</p>
           <div className="mt-5 overflow-x-auto">
             <svg
-              viewBox="0 0 700 190"
+              viewBox="-20 0 700 190"
               className="min-w-[620px]"
               role="img"
               aria-label="Diagram showing a lead automatically moving from captured, to CRM, to assignment, to follow-up, to won"
