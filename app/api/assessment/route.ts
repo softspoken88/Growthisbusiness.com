@@ -51,21 +51,57 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 422 });
   }
 
-  // TODO: replace this log with a real integration, e.g.:
-  //
-  //   await fetch(process.env.ASSESSMENT_WEBHOOK_URL!, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ ...payload, source: "growthisbusiness.com" }),
-  //   });
-  //
-  // or push directly into a CRM's API, or send via an email
-  // provider (Resend, Postmark, SendGrid) to notify the team and
-  // confirm receipt to the submitter.
-  console.log("[assessment-request]", {
-    ...payload,
-    receivedAt: new Date().toISOString(),
-  });
+const apiKey = process.env.RESEND_API_KEY;
+const notifyEmail = process.env.ASSESSMENT_NOTIFY_EMAIL;
+
+if (!apiKey || !notifyEmail) {
+  console.error("Missing RESEND_API_KEY or ASSESSMENT_NOTIFY_EMAIL");
+  return NextResponse.json(
+    { error: "Email service is not configured." },
+    { status: 500 }
+  );
+}
+
+const emailResponse = await fetch("https://api.resend.com/emails", {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${apiKey}`,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    from: "Grow This Business <onboarding@resend.dev>",
+    to: [notifyEmail],
+    reply_to: payload.email,
+    subject: `New Growth Assessment — ${payload.company}`,
+    text: `
+NEW GROWTH ASSESSMENT REQUEST
+
+Name: ${payload.name}
+Company: ${payload.company}
+Email: ${payload.email}
+Phone: ${payload.phone || "Not provided"}
+Website: ${payload.website || "Not provided"}
+Industry: ${payload.industry || "Not provided"}
+Company Size: ${payload.companySize || "Not provided"}
+Biggest Challenge: ${payload.challenge || "Not provided"}
+
+DETAILS:
+${payload.details || "Not provided"}
+
+Submitted from GrowThisBusiness.com
+    `.trim(),
+  }),
+});
+
+if (!emailResponse.ok) {
+  const emailError = await emailResponse.text();
+  console.error("Resend error:", emailError);
+
+  return NextResponse.json(
+    { error: "Unable to send assessment notification." },
+    { status: 500 }
+  );
+}
 
   return NextResponse.json({ ok: true });
 }
