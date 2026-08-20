@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   GROW THIS BUSINESS — design tokens
+   Direction: "operating blueprint" — a technical, drafted-systems
+   aesthetic (ink navy + cool paper + amber signal) rather than a
+   soft agency look. Node-and-path line work is the recurring
+   signature: it shows up in the mark, the hero schematic, and as
+   list connectors, standing in for "things that are wired together
+   correctly" vs. "things that are dropped."
+   --------------------------------------------------------------- */
+
+@theme inline {
+  /* surfaces */
+  --color-ink: #0b1b33;       /* primary dark surface */
+  --color-ink-2: #10233f;     /* slightly lifted dark panel */
+  --color-ink-3: #16305a;     /* raised dark panel / hover */
+  --color-paper: #f4f5f8;     /* primary light surface, cool not cream */
+  --color-paper-2: #ecedf2;   /* recessed light panel */
+  --color-line: #d7dbe4;      /* hairline / grid on paper */
+  --color-line-ink: rgba(255, 255, 255, 0.14); /* hairline / grid on ink */
+
+  /* text */
+  --color-ink-text: #0f1830;
+  --color-ink-muted: #545f78;
+  --color-paper-text: #f4f6fb;
+  --color-paper-muted: #aab3cc;
+
+  /* brand accents */
+  --color-structural: #2c57a6; /* mid blue — links, secondary emphasis */
+  --color-structural-2: #4472c4;
+  --color-signal: #e8a33d;     /* amber — primary CTA / signature accent */
+  --color-signal-deep: #c8841f;
+  --color-good: #3f9668;       /* connected / resolved state */
+
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink-text);
+  font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Blueprint grid backdrop — used behind the hero and a couple of
+   dark sections. Two line weights, like drafting paper. */
+.bp-grid-ink {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size:
+    16px 16px, 16px 16px,
+    96px 96px, 96px 96px;
+  background-position: -1px -1px;
+}
+
+.bp-grid-paper {
+  background-image:
+    linear-gradient(rgba(15, 24, 48, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 24, 48, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Dashed structural rule used at section seams, like a fold/cut
+   line on a drawing sheet. */
+.bp-rule {
+  border-top: 1px dashed var(--color-line);
+}
+.bp-rule-ink {
+  border-top: 1px dashed var(--color-line-ink);
+}
+
+/* Corner-bracket frame, like crop marks on a technical drawing.
+   Applied to the hero schematic panel and a few feature frames. */
+.bp-corners {
+  position: relative;
+}
+.bp-corners::before,
+.bp-corners::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+.bp-corners::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--color-signal);
+  border-left: 2px solid var(--color-signal);
+}
+.bp-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--color-signal);
+  border-right: 2px solid var(--color-signal);
+}
+
+/* Eyebrow / kicker label style — mono, tracked out, used as the
+   "drawing label" for each section. */
+.bp-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+}
+
+/* Utility: numeric tabular figures for KPI-style numbers */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Flowing signal along a connector path — the hero schematic and
+   the "after" workflow use this to show information moving
+   automatically through a system. */
+.bp-flow-path {
+  stroke-dasharray: 5 9;
+  animation: bp-flow 3.2s linear infinite;
+}
+@keyframes bp-flow {
+  to {
+    stroke-dashoffset: -140;
+  }
+}
+
+.bp-node-pulse {
+  animation: bp-pulse 2.6s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes bp-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
