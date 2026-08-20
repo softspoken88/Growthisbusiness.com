@@ -78,7 +78,7 @@ contact details and legal copy that need real content:
 
 | What | Where |
 |---|---|
-| Phone number `(800) 555-0100` | `components/Header.tsx`, `components/Footer.tsx`, `app/layout.tsx` (JSON-LD) |
+
 | Email `hello@growthisbusiness.com` | `components/Footer.tsx`, `app/layout.tsx` (JSON-LD), `components/GrowthAssessmentForm.tsx` (error copy) |
 | LinkedIn URL | `components/Footer.tsx`, `app/layout.tsx` (JSON-LD `sameAs`) |
 | Privacy Policy body copy | `app/privacy/page.tsx` |
@@ -163,6 +163,13 @@ one-off paragraphs sit directly in each component's JSX.
 The brief plans for: `/business-automation`, `/small-business-consulting`,
 `/sales-consulting`, `/sales-automation`, `/crm-consulting`,
 `/workflow-automation`, `/business-growth-consulting`.
+
+Workforce training has its own set of planned pages, following the
+same "don't publish until there's real content" rule:
+`/lms-consulting`, `/lms-selection`, `/training-content`,
+`/compliance-training`, `/safety-training`, `/sales-training`,
+`/custom-elearning-development`. `app/workforce-training/page.tsx`
+is the hub these would eventually link out from.
 
 For each, create `app/<slug>/page.tsx` following the pattern in
 `app/assessment/page.tsx`:
