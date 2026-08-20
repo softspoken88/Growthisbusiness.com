@@ -44,6 +44,16 @@ export default function Footer() {
               Sales, systems, and automation consulting for owner-led
               businesses ready for their next stage of growth.
             </p>
+            <p className="mt-5 max-w-xs text-[14.5px] leading-relaxed text-paper-text">
+              Prefer email? Reach us at{" "}
+              <a
+                href="mailto:hello@growthisbusiness.com"
+                className="font-medium text-signal hover:underline"
+              >
+                hello@growthisbusiness.com
+              </a>{" "}
+              — we read every message.
+            </p>
             <p className="bp-label mt-6 text-paper-muted/80">GrowThisBusiness.com</p>
           </div>
 
@@ -77,7 +87,6 @@ export default function Footer() {
             </Link>
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span className="bp-label">[ Placeholder email ]</span>
             <a href="mailto:hello@growthisbusiness.com" className="hover:text-paper-text">
               hello@growthisbusiness.com
             </a>

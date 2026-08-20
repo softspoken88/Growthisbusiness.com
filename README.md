@@ -115,22 +115,44 @@ propagation is usually minutes, occasionally up to 24-48 hours.
 
 ## 4. Connecting the contact form
 
-`app/api/assessment/route.ts` currently validates submissions and
-logs them (`console.log`, visible in Vercel's function logs) — it
-doesn't send anywhere yet. To wire it up, pick one:
+`app/api/assessment/route.ts` validates submissions, logs them
+(`console.log`, visible in Vercel's function logs), and emails a
+notification to `NOTIFY_EMAIL_TO` (defaults to
+jcollins@growthisbusiness.com) via Resend — but only once
+`RESEND_API_KEY` is set in your environment. Without it, submissions
+are still logged, just not emailed, and visitors still see a normal
+success message either way.
 
-- **Webhook (Zapier / Make / a CRM's inbound webhook):** set
-  `ASSESSMENT_WEBHOOK_URL` in your environment, then uncomment/adapt
-  the `fetch(...)` call already sketched in the route's `TODO`
-  comment. This is the fastest path to the flow described in the
-  brief (CRM → confirmation email → internal notification →
-  assignment → scheduling link → follow-up).
+**To make it actually deliver:**
+
+1. Create a free account at [resend.com](https://resend.com).
+2. Verify `growthisbusiness.com` as a domain in Resend (Domains →
+   Add Domain) — it'll give you a few DNS records to add in
+   Cloudflare, the same pattern used for the Vercel setup. **This
+   step isn't optional**: until the domain is verified, Resend only
+   allows sending from its own `onboarding@resend.dev` sandbox
+   address, and only to the email address the Resend account itself
+   was created with — not to arbitrary recipients like
+   jcollins@growthisbusiness.com.
+3. Once verified, update the `from` address in
+   `app/api/assessment/route.ts` to something on your own domain
+   (e.g. `Grow This Business <notifications@growthisbusiness.com>`).
+4. Create an API key in Resend, add it as `RESEND_API_KEY` in
+   Vercel's project environment variables, and redeploy (env var
+   changes need a new deployment to take effect — push any commit,
+   or use Vercel's "Redeploy" button).
+
+Other paths remain valid alternatives if you'd rather not use
+Resend:
+
+- **Webhook (Zapier / Make / a CRM's inbound webhook):** replace the
+  Resend `fetch` call with one to your own webhook URL. This is the
+  fastest path to the fuller flow described in the original brief
+  (CRM → confirmation email → internal notification → assignment →
+  scheduling link → follow-up).
 - **Direct CRM API** (HubSpot, GoHighLevel, etc.): call the CRM's
   "create contact/deal" endpoint directly from the route handler
   using their SDK or REST API and an API key stored as an env var.
-- **Email notification** (Resend, Postmark, SendGrid): send yourself
-  a notification and the submitter a confirmation from the route
-  handler.
 
 The form itself (`components/GrowthAssessmentForm.tsx`) already
 collects every field from the brief (name, company, email, phone,

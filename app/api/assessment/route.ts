@@ -3,16 +3,21 @@ import { NextResponse } from "next/server";
 /**
  * Growth Assessment form handler.
  *
- * This is intentionally the one manual step in an otherwise
- * automated flow: it's a placeholder that validates the payload and
- * logs it. Wire it up to a real destination before launch — see
- * "Connecting the assessment form" in the README for options
- * (CRM webhook, Zapier/Make catch hook, or an email provider like
- * Resend).
+ * Validates the submission, logs it, and — if RESEND_API_KEY is
+ * configured — emails a notification to NOTIFY_EMAIL_TO (defaults
+ * to jcollins@growthisbusiness.com below). If the key isn't set yet,
+ * or Resend fails to deliver, the visitor still sees success; we log
+ * the problem server-side instead of showing a broken form.
  *
- * Suggested target flow once connected:
- *   Website → CRM → Confirmation Email → Internal Notification
- *   → Lead Assignment → Scheduling Link → Follow-Up Workflow
+ * IMPORTANT — this will not actually deliver until the
+ * growthisbusiness.com domain is verified with Resend. An unverified
+ * Resend account can only send from its sandbox address
+ * (onboarding@resend.dev) to the same email the Resend account
+ * itself was created with — not to arbitrary recipients like
+ * jcollins@growthisbusiness.com. Verify the domain in Resend (a
+ * handful of DNS records in Cloudflare, the same pattern used for
+ * Vercel) to lift that restriction, then update the "from" address
+ * below to something on your own domain.
  */
 
 type AssessmentPayload = {
@@ -28,6 +33,7 @@ type AssessmentPayload = {
 };
 
 const REQUIRED_FIELDS: (keyof AssessmentPayload)[] = ["name", "company", "email"];
+const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL_TO || "jcollins@growthisbusiness.com";
 
 export async function POST(request: Request) {
   let payload: AssessmentPayload;
@@ -51,30 +57,29 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 422 });
   }
 
-const apiKey = process.env.RESEND_API_KEY;
-const notifyEmail = process.env.NOTIFY_EMAIL_TO;
+  console.log("[assessment-request]", { ...payload, receivedAt: new Date().toISOString() });
 
-if (!apiKey || !notifyEmail) {
-console.error("Missing RESEND_API_KEY or NOTIFY_EMAIL_TO");
-  return NextResponse.json(
-    { error: "Email service is not configured." },
-    { status: 500 }
-  );
-}
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn(
+      `[assessment-request] RESEND_API_KEY not set — submission logged only, nothing emailed to ${NOTIFY_EMAIL}`
+    );
+    return NextResponse.json({ ok: true });
+  }
 
-const emailResponse = await fetch("https://api.resend.com/emails", {
-  method: "POST",
-  headers: {
-    Authorization: `Bearer ${apiKey}`,
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    from: "Grow This Business <onboarding@resend.dev>",
-    to: [notifyEmail],
-    reply_to: payload.email,
-    subject: `New Growth Assessment — ${payload.company}`,
-    text: `
-NEW GROWTH ASSESSMENT REQUEST
+  try {
+    const emailResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Grow This Business <onboarding@resend.dev>",
+        to: [NOTIFY_EMAIL],
+        reply_to: payload.email,
+        subject: `New Growth Assessment — ${payload.company}`,
+        text: `NEW GROWTH ASSESSMENT REQUEST
 
 Name: ${payload.name}
 Company: ${payload.company}
@@ -88,20 +93,17 @@ Biggest Challenge: ${payload.challenge || "Not provided"}
 DETAILS:
 ${payload.details || "Not provided"}
 
-Submitted from GrowThisBusiness.com
-    `.trim(),
-  }),
-});
+Submitted from GrowThisBusiness.com`,
+      }),
+    });
 
-if (!emailResponse.ok) {
-  const emailError = await emailResponse.text();
-  console.error("Resend error:", emailError);
-
-  return NextResponse.json(
-    { error: "Unable to send assessment notification." },
-    { status: 500 }
-  );
-}
+    if (!emailResponse.ok) {
+      const emailError = await emailResponse.text();
+      console.error("[assessment-request] Resend error:", emailError);
+    }
+  } catch (err) {
+    console.error("[assessment-request] Failed to reach Resend:", err);
+  }
 
   return NextResponse.json({ ok: true });
 }
