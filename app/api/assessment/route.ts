@@ -52,10 +52,10 @@ export async function POST(request: Request) {
   }
 
 const apiKey = process.env.RESEND_API_KEY;
-const notifyEmail = process.env.ASSESSMENT_NOTIFY_EMAIL;
+const notifyEmail = process.env.NOTIFY_EMAIL_TO;
 
 if (!apiKey || !notifyEmail) {
-  console.error("Missing RESEND_API_KEY or ASSESSMENT_NOTIFY_EMAIL");
+console.error("Missing RESEND_API_KEY or NOTIFY_EMAIL_TO");
   return NextResponse.json(
     { error: "Email service is not configured." },
     { status: 500 }
