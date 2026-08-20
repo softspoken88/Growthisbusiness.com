@@ -44,6 +44,8 @@ export const metadata: Metadata = {
     "CRM consulting",
     "business systems consulting",
     "workflow automation",
+    "workforce training consulting",
+    "LMS consulting",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -77,9 +79,9 @@ const jsonLd = {
       logo: `${SITE_URL}/icon.svg`,
       description:
         "Sales, systems, and business automation consulting for owner-led companies.",
-      // TODO: replace placeholders with real contact details before launch.
+      // TODO: email is still a placeholder — replace before launch.
       email: "hello@growthisbusiness.com",
-      telephone: "+1-800-555-0100",
+      telephone: "+19186181274",
       sameAs: ["https://www.linkedin.com/company/growthisbusiness"],
     },
     {
@@ -88,9 +90,10 @@ const jsonLd = {
       name: "Grow This Business",
       image: `${SITE_URL}/icon.svg`,
       url: SITE_URL,
+      telephone: "+19186181274",
       priceRange: "$$",
       description:
-        "Growth, sales, systems, operations, and business automation consulting for small and lower-middle-market businesses.",
+        "Growth, sales, systems, operations, business automation, and workforce training consulting for small and lower-middle-market businesses.",
       areaServed: "US",
       knowsAbout: [
         "Sales process development",
@@ -98,6 +101,8 @@ const jsonLd = {
         "Business process automation",
         "Business operations consulting",
         "Go-to-market strategy",
+        "Workforce training consulting",
+        "LMS selection",
       ],
     },
   ],

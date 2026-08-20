@@ -21,6 +21,11 @@ const CHALLENGES = [
   "Technology / Systems",
   "Reporting",
   "Scaling",
+  "Workforce Training",
+  "LMS Selection / Replacement",
+  "Compliance & Safety Training",
+  "Training Content",
+  "Custom Course Development",
   "Not Sure Yet",
 ];
 

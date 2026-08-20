@@ -36,6 +36,18 @@ const SERVICES = [
     ],
   },
   {
+    tag: "Workforce Training & Learning Solutions",
+    title: "Develop Your Workforce",
+    copy:
+      "Help your people learn what the job actually requires — from picking the right learning technology to building training that people finish.",
+    points: [
+      "LMS selection & vendor evaluation",
+      "Compliance & safety training",
+      "Professional & sales training",
+      "Custom learning content",
+    ],
+  },
+  {
     tag: "Growth Consulting",
     title: "Scale Smarter",
     copy:
@@ -56,18 +68,18 @@ export default function CoreServices() {
         <div className="max-w-2xl">
           <p className="bp-label text-structural">How We Help</p>
           <h2 className="mt-4 font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-text sm:text-[2.35rem]">
-            Four levers. One connected plan.
+            Five levers. One connected plan.
           </h2>
           <p className="mt-5 text-[16px] leading-relaxed text-ink-muted">
             We rarely fix one of these in isolation — revenue, workload,
-            systems, and scale are usually the same problem seen from
-            different desks.
+            systems, people, and scale are usually the same problem seen
+            from different desks.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
           {SERVICES.map((s, i) => (
-            <div key={s.title} className="flex flex-col bg-paper p-7">
+            <div key={s.title} className="flex flex-col bg-paper p-6">
               <span className="bp-label text-signal-deep">
                 {String(i + 1).padStart(2, "0")}
               </span>

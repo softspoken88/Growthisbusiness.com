@@ -54,6 +54,13 @@ export default function AssessmentPage() {
             <h2 className="mt-3 font-display text-[1.5rem] font-semibold text-ink-text">
               Request your assessment
             </h2>
+            <p className="mt-2 text-[13.5px] text-ink-muted">
+              Prefer to talk now?{" "}
+              <a href="tel:+19186181274" className="font-medium text-structural hover:underline">
+                Call (918) 618-1274
+              </a>
+              .
+            </p>
             <div className="mt-8">
               <GrowthAssessmentForm />
             </div>

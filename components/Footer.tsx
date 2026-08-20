@@ -8,6 +8,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
       { label: "Sales & Revenue Growth", href: "/#how-we-help" },
       { label: "Business Automation", href: "/#how-we-help" },
       { label: "Systems & Operations", href: "/#how-we-help" },
+      { label: "Workforce Training", href: "/workforce-training" },
       { label: "Growth Consulting", href: "/#how-we-help" },
     ],
   },
@@ -76,12 +77,12 @@ export default function Footer() {
             </Link>
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span className="bp-label">[ Placeholder ]</span>
+            <span className="bp-label">[ Placeholder email ]</span>
             <a href="mailto:hello@growthisbusiness.com" className="hover:text-paper-text">
               hello@growthisbusiness.com
             </a>
-            <a href="tel:+18005550100" className="hover:text-paper-text">
-              (800) 555-0100
+            <a href="tel:+19186181274" className="hover:text-paper-text">
+              (918) 618-1274
             </a>
             <a
               href="https://www.linkedin.com/company/growthisbusiness"

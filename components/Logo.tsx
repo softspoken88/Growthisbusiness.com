@@ -47,12 +47,18 @@ export function Mark({ className, size = 40 }: MarkProps) {
   );
 }
 
-export function Wordmark({ className }: { className?: string }) {
+type WordmarkProps = {
+  className?: string;
+  size?: number;
+};
+
+export function Wordmark({ className, size = 40 }: WordmarkProps) {
+  const nameSize = size >= 42 ? "text-[17px]" : "text-[16px]";
   return (
     <span className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
-      <Mark size={34} />
+      <Mark size={size} />
       <span className="flex flex-col leading-none">
-        <span className="font-display font-semibold text-[15px] tracking-tight text-ink-text">
+        <span className={`font-display font-semibold ${nameSize} tracking-tight text-ink-text`}>
           Grow This Business
         </span>
         <span className="bp-label text-ink-muted mt-0.5">
@@ -63,12 +69,13 @@ export function Wordmark({ className }: { className?: string }) {
   );
 }
 
-export function WordmarkOnDark({ className }: { className?: string }) {
+export function WordmarkOnDark({ className, size = 40 }: WordmarkProps) {
+  const nameSize = size >= 42 ? "text-[17px]" : "text-[16px]";
   return (
     <span className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
-      <Mark size={34} />
+      <Mark size={size} />
       <span className="flex flex-col leading-none">
-        <span className="font-display font-semibold text-[15px] tracking-tight text-paper-text">
+        <span className={`font-display font-semibold ${nameSize} tracking-tight text-paper-text`}>
           Grow This Business
         </span>
         <span className="bp-label text-paper-muted mt-0.5">
