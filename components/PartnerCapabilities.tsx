@@ -1,12 +1,14 @@
-const PARTNER_AREAS = [
-  "Website design & development",
-  "SEO",
-  "Paid advertising & PPC",
-  "Graphic design & branding",
-  "Bookkeeping & specialized accounting",
-  "Advanced software development & integrations",
-  "Instructional design & training-content development",
-  "Business phone, internet & connectivity",
+import Link from "next/link";
+
+const PARTNER_AREAS: { label: string; href?: string }[] = [
+  { label: "Website design & development" },
+  { label: "SEO" },
+  { label: "Paid advertising & PPC" },
+  { label: "Graphic design & branding" },
+  { label: "Bookkeeping & financial operations", href: "/bookkeeping" },
+  { label: "Advanced software development & integrations" },
+  { label: "Instructional design & training-content development" },
+  { label: "Business phone, internet & connectivity" },
 ];
 
 export default function PartnerCapabilities() {
@@ -32,9 +34,15 @@ export default function PartnerCapabilities() {
             <p className="bp-label text-ink-muted">Coordinated Specialist Areas</p>
             <ul className="mt-5 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
               {PARTNER_AREAS.map((a) => (
-                <li key={a} className="flex items-start gap-2.5 text-[14.5px] text-ink-text/90">
+                <li key={a.label} className="flex items-start gap-2.5 text-[14.5px] text-ink-text/90">
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-structural" />
-                  {a}
+                  {a.href ? (
+                    <Link href={a.href} className="text-structural underline-offset-2 hover:underline">
+                      {a.label}
+                    </Link>
+                  ) : (
+                    a.label
+                  )}
                 </li>
               ))}
             </ul>

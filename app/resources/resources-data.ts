@@ -50,4 +50,25 @@ export const RESOURCES: ResourceMeta[] = [
       "The signs that your current system has quietly become the bottleneck it was supposed to fix.",
     category: "Systems & Operations",
   },
+  {
+    slug: "how-much-does-bookkeeping-cost",
+    title: "How Much Does Small Business Bookkeeping Cost?",
+    excerpt:
+      "Why two bookkeeping quotes with the same monthly price can represent very different amounts of actual work.",
+    category: "Bookkeeping & Financial Operations",
+  },
+  {
+    slug: "bookkeeping-vs-accounting",
+    title: "Bookkeeping vs. Accounting: What's the Difference?",
+    excerpt:
+      "They get used interchangeably, but they're different jobs, done at different points, often by different people.",
+    category: "Bookkeeping & Financial Operations",
+  },
+  {
+    slug: "automate-invoicing-payment-follow-up",
+    title: "How to Automate Invoicing and Payment Follow-Up",
+    excerpt:
+      "What actually changes when getting paid stops depending on someone remembering to send a reminder.",
+    category: "Bookkeeping & Financial Operations",
+  },
 ];

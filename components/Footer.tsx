@@ -9,6 +9,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
       { label: "Business Automation", href: "/#how-we-help" },
       { label: "Systems & Operations", href: "/#how-we-help" },
       { label: "Workforce Training", href: "/workforce-training" },
+      { label: "Bookkeeping & Financial Operations", href: "/bookkeeping" },
       { label: "Growth Consulting", href: "/#how-we-help" },
     ],
   },

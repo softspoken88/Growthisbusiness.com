@@ -4,6 +4,7 @@ import { Wordmark } from "./Logo";
 const NAV = [
   { label: "How We Help", href: "/#how-we-help" },
   { label: "Workforce Training", href: "/workforce-training" },
+  { label: "Bookkeeping", href: "/bookkeeping" },
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Industries", href: "/#industries" },
   { label: "Resources", href: "/resources" },

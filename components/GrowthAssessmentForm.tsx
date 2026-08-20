@@ -27,6 +27,7 @@ const CHALLENGES = [
   "Training Content",
   "Custom Course Development",
   "Business Phone / Internet",
+  "Bookkeeping & Financial Operations",
   "Not Sure Yet",
 ];
 

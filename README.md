@@ -200,6 +200,12 @@ is the hub these would eventually link out from — its content
 category grid is the natural place to add those links once each page
 exists.
 
+Bookkeeping has its own planned pages too, same rule — genuinely
+useful content per industry, not the same page with a name swapped:
+`/bookkeeping/hvac`, `/bookkeeping/plumbing`, `/bookkeeping/contractors`,
+`/bookkeeping/property-management`. `app/bookkeeping/page.tsx` is
+their hub.
+
 For each, create `app/<slug>/page.tsx` (or
 `app/workforce-training/<slug>/page.tsx` for the nested ones)
 following the pattern in `app/assessment/page.tsx`:
@@ -295,7 +301,19 @@ Currently represented as a line item in
 only — not a homepage pillar (per the brief) and not yet a dedicated
 page, to avoid a thin page with nothing behind it. If this grows into
 its own service page later, `/business-technology` following the
-`app/workforce-training/page.tsx` pattern is the natural slug.
+`app/workforce-training/page.tsx` / `app/bookkeeping/page.tsx` pattern
+is the natural slug.
+
+## 12. Navigation is getting close to crowded
+
+The desktop nav (`components/Header.tsx`) is now 7 flat items:
+How We Help, Workforce Training, Bookkeeping, How It Works,
+Industries, Resources, Ways to Work Together. It still fits, but if
+another dedicated service page gets added, a "Services" dropdown
+grouping the service-page links (Workforce Training, Bookkeeping,
+Business Technology once it exists) would keep the top-level nav from
+growing further — not built now since it wasn't asked for, but worth
+doing before adding an 8th item.
 
 ## SEO notes
 
