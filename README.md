@@ -304,16 +304,53 @@ its own service page later, `/business-technology` following the
 `app/workforce-training/page.tsx` / `app/bookkeeping/page.tsx` pattern
 is the natural slug.
 
-## 12. Navigation is getting close to crowded
+## 12. Homepage & navigation structure (as of the Grow/Systemize/Develop pass)
 
-The desktop nav (`components/Header.tsx`) is now 7 flat items:
-How We Help, Workforce Training, Bookkeeping, How It Works,
-Industries, Resources, Ways to Work Together. It still fits, but if
-another dedicated service page gets added, a "Services" dropdown
-grouping the service-page links (Workforce Training, Bookkeeping,
-Business Technology once it exists) would keep the top-level nav from
-growing further — not built now since it wasn't asked for, but worth
-doing before adding an 8th item.
+The homepage went from 5 equal-weight service pillars down to 3
+visually dominant ones, plus a subordinate "Additional Solutions"
+tier — a real information-architecture change, not just new content:
+
+- **`components/CoreServices.tsx`** — 3 cards now: Grow (Sales &
+  Revenue), Systemize (Systems, CRM & Automation — this is the old
+  Automate Work + Build Better Systems merged), Develop (Workforce
+  Training & Learning). Each card has an id (`#grow`, `#systemize`)
+  that nav links and the Services dropdown scroll to; Develop links
+  straight to `/workforce-training` since that's a full page.
+  "Scale Smarter" as a distinct pillar is retired — its "ongoing
+  strategic advisory" idea now lives in the expanded How It Works
+  section below rather than as its own card.
+- **`components/HowItWorks.tsx`** — expanded from 4 steps (Assess /
+  Identify / Build / Optimize) to 7 (Assessment / Strategy /
+  Selection / Implementation / Automation / Training / Optimization),
+  doubling as the "GTB's Role" cross-cutting narrative. This absorbs
+  that concept instead of adding a separate new homepage section.
+- **`components/PartnerCapabilities.tsx`** — relabeled to "Additional
+  Solutions" framing; same content, same subordinate visual treatment
+  it already had. Now has `id="additional-solutions"` as a nav/dropdown
+  target. Bookkeeping and Business Technology live here, not as
+  homepage pillars, per the brief.
+- **`components/Header.tsx`** — rebuilt as a client component with a
+  real Services dropdown (Grow / Systemize / Develop, then an
+  Additional Solutions sub-group) and a mobile hamburger menu with the
+  same structure. The flat top-level nav trimmed down to Services /
+  Industries / Resources, closer to the brief's suggested 5-item list.
+  "Ways to Work Together" was dropped from the top nav (not deleted —
+  `components/EngagementModels.tsx` and its `#engagements` anchor are
+  untouched; it's still linked from the footer).
+
+**"About" was deliberately left out of the nav.** The brief's suggested
+top-level list includes it, but no About page exists, and writing one
+means real content (team, story, credibility) that shouldn't be
+invented. Add `app/about/page.tsx` and an `About` entry in
+`SIMPLE_NAV` in `Header.tsx` whenever there's real content for it.
+
+**Mobile navigation exists now.** Before this pass there was no mobile
+menu at all — nav links simply disappeared below the `lg` breakpoint.
+That was a pre-existing gap already noted in this file; hiding
+Services behind a desktop-only dropdown would have made it worse
+rather than just leaving it as it was, so a basic mobile menu
+(hamburger toggle, same link structure, flatter) was built alongside
+the dropdown rather than left for later.
 
 ## SEO notes
 

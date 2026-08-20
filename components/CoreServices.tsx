@@ -1,76 +1,36 @@
-import {
-  IconGrowRevenue,
-  IconAutomateWork,
-  IconBuildSystems,
-  IconWorkforce,
-  IconScaleSmarter,
-} from "./ServiceIcons";
+import Link from "next/link";
+import { IconGrowRevenue, IconBuildSystems, IconWorkforce } from "./ServiceIcons";
 
-const SERVICES = [
+const PILLARS = [
   {
-    tag: "Sales & Revenue Growth",
-    title: "Grow Revenue",
+    kicker: "Grow",
+    title: "Sales & Revenue",
     icon: IconGrowRevenue,
     copy:
-      "Build a sales process that runs the same way whether you're watching it or not — from first response through the follow-up that actually happens.",
-    points: [
-      "Lead-response & follow-up process",
-      "Pipeline & CRM strategy",
-      "Sales scripts, KPIs & forecasting",
-      "Referral & reactivation strategy",
-    ],
+      "A more predictable path from opportunity to revenue — lead response, pipeline, CRM strategy, and the follow-up that actually happens.",
+    ctaLabel: "Improve Revenue",
+    href: "/assessment",
+    accent: "amber" as const,
   },
   {
-    tag: "Business Automation",
-    title: "Automate Work",
-    icon: IconAutomateWork,
-    copy:
-      "Find the repetitive, manual work eating your team's time and replace it with workflows that run themselves — consistently, every time.",
-    points: [
-      "Lead & form routing",
-      "Automated follow-up sequences",
-      "Review requests & reactivation",
-      "Internal notifications & task creation",
-    ],
-  },
-  {
-    tag: "Systems & Operations",
-    title: "Build Better Systems",
+    kicker: "Systemize",
+    title: "Systems, CRM & Automation",
     icon: IconBuildSystems,
     copy:
-      "Replace tribal knowledge with documented process. Build the CRM, reporting, and operational backbone that lets the business scale past the owner.",
-    points: [
-      "Process mapping & SOPs",
-      "CRM implementation & optimization",
-      "System integrations",
-      "KPI dashboards & reporting",
-    ],
+      "Stop relying on manual work, disconnected tools, and people remembering every next step. CRM, workflow automation, reporting, and the operational backbone that lets the business scale.",
+    ctaLabel: "Build Better Systems",
+    href: "/assessment",
+    accent: "blue" as const,
   },
   {
-    tag: "Workforce Training & Learning Solutions",
-    title: "Develop Your Workforce",
+    kicker: "Develop",
+    title: "Workforce Training & Learning",
     icon: IconWorkforce,
     copy:
-      "Help your people learn what the job actually requires — from picking the right learning technology to building training that people finish.",
-    points: [
-      "LMS selection & vendor evaluation",
-      "Compliance & safety training",
-      "Professional & sales training",
-      "Custom learning content",
-    ],
-  },
-  {
-    tag: "Growth Consulting",
-    title: "Scale Smarter",
-    icon: IconScaleSmarter,
-    copy:
-      "Get an outside operator's read on what's actually slowing growth, and a prioritized plan — not a binder that sits on a shelf.",
-    points: [
-      "Business Growth Assessments",
-      "Revenue & operational analysis",
-      "Growth roadmaps",
-      "Ongoing strategic advisory",
-    ],
+      "Give your people the systems, content, and training they need to perform — from LMS selection to compliance, leadership, and custom learning content.",
+    ctaLabel: "Develop Your Workforce",
+    href: "/workforce-training",
+    accent: "amber" as const,
   },
 ];
 
@@ -81,39 +41,35 @@ export default function CoreServices() {
         <div className="max-w-2xl">
           <p className="bp-label text-structural">How We Help</p>
           <h2 className="mt-4 font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-text sm:text-[2.35rem]">
-            Five levers. One connected plan.
+            Grow. Systemize. Develop.
           </h2>
           <p className="mt-5 text-[16px] leading-relaxed text-ink-muted">
-            We rarely fix one of these in isolation — revenue, workload,
-            systems, people, and scale are usually the same problem seen
-            from different desks.
+            Three outcomes, one connected plan — revenue, the systems
+            behind it, and the people running it are rarely separate
+            problems.
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
-          {SERVICES.map((s, i) => (
-            <div key={s.title} className="flex flex-col bg-paper p-6">
-              <div className="flex items-center justify-between">
-                <s.icon className="h-11 w-11" />
-                <span className="bp-label text-signal-deep">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <p className="mt-4 text-[12.5px] font-medium uppercase tracking-wide text-ink-muted">
-                {s.tag}
-              </p>
-              <h3 className="mt-2 font-display text-[1.35rem] font-semibold text-ink-text">
-                {s.title}
+        <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3">
+          {PILLARS.map((p) => (
+            <div
+              key={p.title}
+              id={p.kicker.toLowerCase()}
+              className="scroll-mt-24 flex flex-col rounded-2xl border border-line bg-paper p-8"
+            >
+              <p.icon className="h-14 w-14" />
+              <p className="mt-6 bp-label text-signal-deep">{p.kicker}</p>
+              <h3 className="mt-2 font-display text-[1.6rem] font-semibold leading-tight text-ink-text">
+                {p.title}
               </h3>
-              <p className="mt-3 text-[14.5px] leading-relaxed text-ink-muted">{s.copy}</p>
-              <ul className="mt-5 space-y-2.5 border-t border-line pt-5">
-                {s.points.map((pt) => (
-                  <li key={pt} className="flex items-start gap-2 text-[13.5px] text-ink-text/85">
-                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-structural" />
-                    {pt}
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink-muted">{p.copy}</p>
+              <Link
+                href={p.href}
+                className="mt-7 inline-flex w-fit items-center gap-1.5 border-t border-line pt-5 text-[14px] font-semibold text-structural transition-colors hover:text-ink-text"
+              >
+                {p.ctaLabel}
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
             </div>
           ))}
         </div>

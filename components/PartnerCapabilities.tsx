@@ -13,14 +13,13 @@ const PARTNER_AREAS: { label: string; href?: string }[] = [
 
 export default function PartnerCapabilities() {
   return (
-    <section className="bg-paper-2 bp-grid-paper">
+    <section id="additional-solutions" className="scroll-mt-24 bg-paper-2 bp-grid-paper">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <div>
-            <p className="bp-label text-structural">When Specialized Work Is Needed</p>
+            <p className="bp-label text-structural">Additional Solutions</p>
             <h2 className="mt-4 font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-text sm:text-[2.35rem]">
-              One point of accountability, even when the work touches
-              several disciplines.
+              Additional solutions when your business needs them.
             </h2>
             <p className="mt-5 max-w-md text-[15.5px] leading-relaxed text-ink-muted">
               Some projects need deep, specialized expertise beyond

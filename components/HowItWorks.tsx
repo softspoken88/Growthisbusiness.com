@@ -1,23 +1,38 @@
 const STEPS = [
   {
     n: "01",
-    title: "Assess",
-    copy: "We look at how the business actually operates today — sales, follow-up, systems, and the manual work behind the scenes.",
+    title: "Assessment",
+    copy: "Understand how the business operates today.",
   },
   {
     n: "02",
-    title: "Identify",
-    copy: "We find where revenue is leaking, where work is duplicated, and where technology isn't earning its keep.",
+    title: "Strategy",
+    copy: "Determine what actually needs to change.",
   },
   {
     n: "03",
-    title: "Build",
-    copy: "We implement the processes, technology, and automation to fix it — or coordinate the right specialist to build it with you.",
+    title: "Selection",
+    copy: "Identify the right tools, technology, or content.",
   },
   {
     n: "04",
-    title: "Optimize",
-    copy: "We measure what changed, then keep tuning. Systems don't get built once and left alone.",
+    title: "Implementation",
+    copy: "Build and configure the solution.",
+  },
+  {
+    n: "05",
+    title: "Automation",
+    copy: "Connect it to how the business actually runs.",
+  },
+  {
+    n: "06",
+    title: "Training",
+    copy: "Help your people use what's been built.",
+  },
+  {
+    n: "07",
+    title: "Optimization",
+    copy: "Measure results and keep improving.",
   },
 ];
 
@@ -28,25 +43,34 @@ export default function HowItWorks() {
         <div className="max-w-2xl">
           <p className="bp-label text-structural">How It Works</p>
           <h2 className="mt-4 font-display text-[2rem] font-semibold leading-[1.15] tracking-tight text-ink-text sm:text-[2.35rem]">
-            A straightforward process, in order.
+            One strategic partner for the systems that help your business
+            grow.
           </h2>
+          <p className="mt-5 text-[16px] leading-relaxed text-ink-muted">
+            We don&rsquo;t start with software. We start with what your
+            business needs — then carry it through every step below,
+            whether we&rsquo;re building it directly or coordinating the
+            right specialist.
+          </p>
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((s, i) => (
-            <div
-              key={s.n}
-              className={`relative border-t-2 border-ink px-1 py-1 pr-6 ${
-                i > 0 ? "sm:pl-6" : ""
-              }`}
-            >
-              <span className="bp-label text-signal-deep">Step {s.n}</span>
-              <h3 className="mt-5 font-display text-[1.4rem] font-semibold text-ink-text">
-                {s.title}
-              </h3>
-              <p className="mt-3 text-[14.5px] leading-relaxed text-ink-muted">{s.copy}</p>
-            </div>
-          ))}
+          {STEPS.map((s, i) => {
+            const smPad = i % 2 !== 0 ? "sm:pl-6" : "";
+            const lgPad = i % 4 === 0 ? "lg:pl-1" : "lg:pl-6";
+            return (
+              <div
+                key={s.n}
+                className={`relative border-t-2 border-ink px-1 py-1 pb-6 pr-6 ${smPad} ${lgPad}`}
+              >
+                <span className="bp-label text-signal-deep">Step {s.n}</span>
+                <h3 className="mt-4 font-display text-[1.2rem] font-semibold text-ink-text">
+                  {s.title}
+                </h3>
+                <p className="mt-2.5 text-[13.5px] leading-relaxed text-ink-muted">{s.copy}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
