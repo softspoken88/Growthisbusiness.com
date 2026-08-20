@@ -26,6 +26,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
     heading: "Company",
     links: [
       { label: "How It Works", href: "/#how-it-works" },
+      { label: "Resources", href: "/resources" },
       { label: "Ways to Work Together", href: "/#engagements" },
       { label: "Free Growth Assessment", href: "/assessment" },
       { label: "Contact", href: "/#contact" },

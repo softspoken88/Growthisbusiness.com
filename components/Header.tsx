@@ -6,6 +6,7 @@ const NAV = [
   { label: "Workforce Training", href: "/workforce-training" },
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Industries", href: "/#industries" },
+  { label: "Resources", href: "/resources" },
   { label: "Ways to Work Together", href: "/#engagements" },
 ];
 

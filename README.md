@@ -235,31 +235,50 @@ financial-services. `components/Industries.tsx` is the natural place
 to link out to these once they exist (each industry card becomes a
 `<Link href="/industries/plumbing">`).
 
-## 9. Resources / articles and attribution tracking — not built yet
+## 9. Resources / articles — now live; attribution tracking — still not built
 
-A workforce-training expansion brief referenced these as if they
-already existed on the site. They don't, and weren't added in that
-pass — building them properly is its own scoped project, not
-something to bolt on silently inside an unrelated content update:
+A prior brief referenced both as if they already existed on the site.
+Neither did. Resources has since been built for real (below);
+attribution tracking is still an open item, since it wasn't actually
+requested as new work — see the note at the end of this section.
 
-- **Resources / SEO articles.** No blog or article system exists.
-  The brief's content ideas ("How much does an LMS cost?", "How to
-  choose an LMS," etc.) are real, good topics, but they need an
-  actual system to live in — at minimum an `app/resources/` index
-  route, a `[slug]/page.tsx` for individual articles, some source
-  for the content (MDX files, a headless CMS, or hand-written pages),
-  and sitemap/internal-linking wiring so they actually support SEO
-  rather than existing in isolation.
-- **Attribution tracking.** Nothing captures UTM parameters, referrer,
-  or landing page today — the Growth Assessment form only sends the
-  fields visible on the form itself. Adding this means deciding on an
-  approach (first-touch vs. last-touch, cookie vs. query-param
-  passthrough) and adding hidden fields to
-  `components/GrowthAssessmentForm.tsx` plus corresponding fields in
-  `app/api/assessment/route.ts`'s payload and email template.
+**Resources / SEO articles** — live at `/resources`. Structure:
 
-Both are reasonable next projects — just flagging that they're new
-builds, not existing infrastructure being preserved.
+- `app/resources/resources-data.ts` — one entry per published
+  article (slug, title, excerpt, category). The sitemap
+  (`app/sitemap.ts`) reads this array automatically, so a new
+  article only needs its data entry here plus its page — nothing
+  else to remember to update.
+- `app/resources/page.tsx` — index/listing page, renders cards from
+  `resources-data.ts`.
+- `app/resources/<slug>/page.tsx` — one folder per article, each a
+  self-contained page using the shared layout below. No CMS, no MDX
+  dependency — plain components, consistent with how the rest of the
+  site is built.
+- `components/ArticleLayout.tsx` — shared wrapper (hero band + reading
+  column + CTA) plus small `H2`, `P`, `List`, and `Callout` helpers so
+  individual article files stay just structure and content.
+
+**To publish a new article:** add an entry to `resources-data.ts`,
+then create `app/resources/<slug>/page.tsx` importing `ArticleLayout`
+and the helper components — follow any existing article as a
+template. Point the CTA (`ctaHref`/`ctaLabel` props) at whichever
+service page fits the topic.
+
+Six articles are live now — enough to make the system real, not the
+full ~20-topic list the original brief sketched out. Adding the rest
+of that list, or any new topic, is the same two-step process above;
+nothing structural is missing.
+
+**Attribution tracking** — still nothing captures UTM parameters,
+referrer, or landing page. This one is genuinely optional, not
+something already assumed to exist that needed rebuilding: the
+instruction that mentioned it said "don't break attribution," which
+doesn't apply to something that was never there. If it's wanted,
+adding it means deciding on an approach (first-touch vs. last-touch,
+cookie vs. query-param passthrough) and adding hidden fields to
+`components/GrowthAssessmentForm.tsx` plus corresponding fields in
+`app/api/assessment/route.ts`'s payload and email template.
 
 ## 10. Activating the partner logo section
 
