@@ -78,11 +78,9 @@ contact details and legal copy that need real content:
 
 | What | Where |
 |---|---|
-
 | Email `hello@growthisbusiness.com` | `components/Footer.tsx`, `app/layout.tsx` (JSON-LD), `components/GrowthAssessmentForm.tsx` (error copy) |
 | LinkedIn URL | `components/Footer.tsx`, `app/layout.tsx` (JSON-LD `sameAs`) |
-| Privacy Policy body copy | `app/privacy/page.tsx` |
-| Terms of Service body copy | `app/terms/page.tsx` |
+| Governing-law state in Terms of Service | `app/terms/page.tsx` — currently set to Oklahoma as a default (matches the business phone number's area code); confirm this matches where Grow This Business, LLC is actually registered |
 
 ## 1. Running locally
 
