@@ -1,7 +1,16 @@
+import {
+  IconGrowRevenue,
+  IconAutomateWork,
+  IconBuildSystems,
+  IconWorkforce,
+  IconScaleSmarter,
+} from "./ServiceIcons";
+
 const SERVICES = [
   {
     tag: "Sales & Revenue Growth",
     title: "Grow Revenue",
+    icon: IconGrowRevenue,
     copy:
       "Build a sales process that runs the same way whether you're watching it or not — from first response through the follow-up that actually happens.",
     points: [
@@ -14,6 +23,7 @@ const SERVICES = [
   {
     tag: "Business Automation",
     title: "Automate Work",
+    icon: IconAutomateWork,
     copy:
       "Find the repetitive, manual work eating your team's time and replace it with workflows that run themselves — consistently, every time.",
     points: [
@@ -26,6 +36,7 @@ const SERVICES = [
   {
     tag: "Systems & Operations",
     title: "Build Better Systems",
+    icon: IconBuildSystems,
     copy:
       "Replace tribal knowledge with documented process. Build the CRM, reporting, and operational backbone that lets the business scale past the owner.",
     points: [
@@ -38,6 +49,7 @@ const SERVICES = [
   {
     tag: "Workforce Training & Learning Solutions",
     title: "Develop Your Workforce",
+    icon: IconWorkforce,
     copy:
       "Help your people learn what the job actually requires — from picking the right learning technology to building training that people finish.",
     points: [
@@ -50,6 +62,7 @@ const SERVICES = [
   {
     tag: "Growth Consulting",
     title: "Scale Smarter",
+    icon: IconScaleSmarter,
     copy:
       "Get an outside operator's read on what's actually slowing growth, and a prioritized plan — not a binder that sits on a shelf.",
     points: [
@@ -80,9 +93,12 @@ export default function CoreServices() {
         <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
           {SERVICES.map((s, i) => (
             <div key={s.title} className="flex flex-col bg-paper p-6">
-              <span className="bp-label text-signal-deep">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+              <div className="flex items-center justify-between">
+                <s.icon className="h-11 w-11" />
+                <span className="bp-label text-signal-deep">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
               <p className="mt-4 text-[12.5px] font-medium uppercase tracking-wide text-ink-muted">
                 {s.tag}
               </p>

@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PartnerLogos from "@/components/PartnerLogos";
+import {
+  IconSafety,
+  IconCompliance,
+  IconLeadership,
+  IconSalesCS,
+  IconBizSkills,
+  IconYouth,
+  IconOnboarding,
+} from "@/components/ServiceIcons";
 
 export const metadata: Metadata = {
   title: "Workforce Training Consulting | LMS Selection & Training Solutions",
@@ -21,30 +30,37 @@ const LMS_POINTS = [
 const CONTENT_CATEGORIES = [
   {
     title: "Workplace Safety & OSHA-Related",
+    icon: IconSafety,
     copy: "Workplace safety, hazard communication, PPE, and emergency preparedness — matched to your industry, not treated as one-size-fits-all.",
   },
   {
     title: "Compliance & Ethics",
+    icon: IconCompliance,
     copy: "Harassment prevention, workplace conduct, HR compliance, and privacy & security awareness.",
   },
   {
     title: "Leadership & Management",
+    icon: IconLeadership,
     copy: "Supervisor fundamentals, coaching, performance management, and change management.",
   },
   {
     title: "Sales & Customer Service",
+    icon: IconSalesCS,
     copy: "Consultative selling, prospecting, customer experience, negotiation, and account management.",
   },
   {
     title: "Business & Professional Skills",
+    icon: IconBizSkills,
     copy: "Communication, time management, workplace technology, and career development.",
   },
   {
     title: "K-12, Afterschool & Youth Development",
+    icon: IconYouth,
     copy: "Professional development for education and youth-serving staff, program quality, and staff development — matched to your specific programs.",
   },
   {
     title: "Employee Onboarding",
+    icon: IconOnboarding,
     copy: "Required training, role-based learning, and your own culture and process training — automatically assigned and tracked.",
   },
 ];
@@ -185,7 +201,8 @@ export default function WorkforceTrainingPage() {
           <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
             {CONTENT_CATEGORIES.map((c) => (
               <div key={c.title} className="bg-paper p-6">
-                <h3 className="font-display text-[1.05rem] font-semibold text-ink-text">
+                <c.icon className="h-11 w-11" />
+                <h3 className="mt-3 font-display text-[1.05rem] font-semibold text-ink-text">
                   {c.title}
                 </h3>
                 <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">{c.copy}</p>
